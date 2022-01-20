@@ -6,6 +6,12 @@
         | var1 when var1 < eps -> var1
         | _ -> calculate(f * i, i + 1., 1. / f) + if i > 1. then n else 0.
 
+    let rec calculate (f: float, i: float, n: float) =
+        match (n < eps) with
+        | true ->n
+        | false when (i > 1) -> n + calculate(f * i, i + 1., 1./f)
+        | false -> calculate(f * i, i + 1., 1. / f)   
+
     calculate(1., 1., 1.)
 
 let dichotomy a b f =

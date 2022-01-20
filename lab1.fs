@@ -27,10 +27,13 @@ let sd (arr: float list) =
     (sum n_arr / float arr.Length) ** 0.5
 
 let numsInRange (arr: float list, min, max) =
-    let rec count (arr: float list, min, max, cnt) = 
+    let rec count (arr: float list, min, max, cnt) =
         match arr with
-        | [] -> 0.
-        | x::xs -> cnt + count(xs, min, max, cnt) + if (x < min) || (x > max) then 0. else 1.
+        | [] -> cnt
+        | x::xs when (x > min) && (x <= max) ->
+            count(xs, min, max, cnt + 1.0)
+        | x::xs ->
+            count(xs, min, max, cnt)
 
     count(arr, min, max, 0.) / float arr.Length * 100.
 
